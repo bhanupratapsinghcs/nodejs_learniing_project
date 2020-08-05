@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Bhanu | <%= title %> </title>
+    <%- include('./partials/style.ejs') %>
+</head>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="blogs content">
+        <h2>All Blogs</h2>
+        <% if(blogs.length>0){ %>
+        <% blogs.forEach(blog=>{%>
+        <a href="/blogs/<%= blog._id %> " class="single">
+            <h3 class="title" style="font-size: 50px;"><%= blog.title %> </h3>
+            <p class="snippet" style="font-size: 20px;"><%=  blog.snippet%></p>
+        </a>
+        <% }) %>
+        <% } %>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>

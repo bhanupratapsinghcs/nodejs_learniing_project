@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Bhanu | <%= title %> </title>
+    <%- include('./partials/style.ejs') %>
+</head>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <h2 style="font-size: 50px;"><%= blog.title  %> </h2>
+    <div class="details content">
+        <div class="content">
+            <p style="font-size:40px;"><%= blog.body     %> </p>
+        </div>
+        <a href="" class="delete" data-doc="<%= blog._id %> ">delete</a>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+    <script>
+        const trashcane = document.querySelector('a.delete');
+
+        trashcane.addEventListener('click', (e) => {
+            const endpoint = `/blogs/${trashcane.dataset.doc}`;
+
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+                .then((resp) => resp.json())
+                .then((data) => window.location.href = data.redirect)
+                .catch(err => console.log(err));
+        })
+    </script>
+</body>
+
+</html>
